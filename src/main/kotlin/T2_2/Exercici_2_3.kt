@@ -68,27 +68,35 @@ class Exercici_2_3 : JFrame() {
     }
 
     fun guardar() {
-        // Instruccions per a guardar el contingut del JTextArea al fitxer.
-
+        if (fCh.selectedFile == null) {
+            val r = fCh.showSaveDialog(this)
+            if (r == JFileChooser.APPROVE_OPTION) {
+                fCh.selectedFile.writeText(area.text)
+            } else
+                println("S'ha cancelat l'accio")
+        } else fCh.selectedFile.writeText(area.text)
     }
 
     fun guardarCom() {
-        // Instruccions per a guardar el contingut del JTextArea al fitxer, amb la possibilitat de canviar el nom
-
+        if (fCh.selectedFile != null)
+            JOptionPane.showMessageDialog(this, "Cambia el nombre del fichero o se reescribira")
+        val r = fCh.showSaveDialog(this)
+        if (r == JFileChooser.APPROVE_OPTION) {
+            fCh.selectedFile.writeText(area.text)
+        } else
+            println("S'ha cancelat l'accio")
     }
 
     fun eixir() {
-        // Instruccions per a eixir
         System.exit(0)
     }
 
     fun quantA() {
-        // Instruccions per a mostrar un diàleg amb la versió (Acerca de...)
-
+        JOptionPane.showMessageDialog(this, "No hi ha ajuda, espavila")
     }
 }
 
 
 fun main(args: Array<String>) {
-    EventQueue.invokeLater( { Exercici_2_3().isVisible = true })
+    EventQueue.invokeLater({ Exercici_2_3().isVisible = true })
 }
